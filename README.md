@@ -22,11 +22,11 @@ dataset.
 
 ```json
 {
-  "answer": "The 4D Man is a 1959 American film about a scientist named Dr. Tony Nelson who develops an electronic amplifier to achieve a 4th dimensional state, allowing objects to pass through each other.",
+  "answer": "Billy Elliot is a 2000 British film about an 11-year-old boy who secretly takes ballet lessons. He lives with his widowed father Jackie and older brother Tony, both coal miners out on strike; his father sends him to the gym for boxing, but Billy secretly practices ballet instead.",
   "contexts": [
-    "Brilliant but irresponsible scientist, Dr. Tony Nelson, develops an electronic amplifier that he hopes will allow any object to achieve a 4th dimensional (4D) state. While in this state, any object"
+    "Billy Elliot, an 11-year-old from the fictional Everington in County Durham, England, loves to dance and has hopes of becoming a professional ballet dancer. Billy lives with his widowed father, Jackie, and older brother, Tony, both coal miners out on strike"
   ],
-  "reasoning": "I searched the plot summaries, found '4D Man' featuring Dr. Tony Nelson, and used it to form the answer."
+  "reasoning": "I searched the plot summaries for a story about an 11-year-old boy secretly taking ballet lessons and matched Billy Elliot."
 }
 ```
 
@@ -97,7 +97,7 @@ python main.py build-index
 ### 2. Ask a question (full RAG)
 
 ```bash
-python main.py query "4d man"
+python main.py query "which movie is about an 11-year-old boy who secretly takes ballet lessons?"
 ```
 
 ### 3. Retrieval only (no LLM / no API key)
@@ -228,3 +228,17 @@ To resolve this, the system implements a dense-sparse hybrid retrieval strategy.
 
 `main.py` prints the structured JSON; `contexts` is always built from the
 *actual* retrieved chunks (never hallucinated by the model).
+
+```bash
+python main.py query "which movie is about an 11-year-old boy who secretly takes ballet lessons?"
+```
+
+```json
+{
+  "answer": "Billy Elliot is a 2000 British film about an 11-year-old boy who secretly takes ballet lessons. He lives with his widowed father Jackie and older brother Tony, both coal miners out on strike; his father sends him to the gym for boxing, but Billy secretly practices ballet instead.",
+  "contexts": [
+    "Billy Elliot, an 11-year-old from the fictional Everington in County Durham, England, loves to dance and has hopes of becoming a professional ballet dancer. Billy lives with his widowed father, Jackie, and older brother, Tony, both coal miners out on strike"
+  ],
+  "reasoning": "I searched the plot summaries for a story about an 11-year-old boy secretly taking ballet lessons and matched Billy Elliot."
+}
+```
