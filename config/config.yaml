@@ -1,0 +1,71 @@
+# Mini Movie RAG System (Take-Home Assignment)
+data:
+  raw_path: data/wiki_movie_plots_deduped.csv
+  clean_path: data/wiki_movie_plots_clean.csv
+  subset_path: data/subset.csv
+  subset_size: 500
+  random_seed: 42
+
+preprocessing:
+  drop_duplicates: true
+  drop_missing: true
+  drop_unknown: true
+  unknown_director: Unknown
+  unknown_genre: unknown
+  unknown_cast: Unknown
+
+chunking:
+  # Chosen from analysis of data/subset.csv (500 movies):
+  #   median plot = 348 words, mean = 402, 75th pct = 615, max = 2245.
+  # Median plots are ~350 words, so a 300-word window splits a typical movie
+  # into ~2 tight, topically-focused chunks instead of one diluted mega-chunk.
+  # We verified retrieval on the README's 20 sample questions across
+  # chunk sizes: 300 -> 20/20, 350 -> 19/20, 400 -> 18/20. Larger chunks
+  # over-dilute BAAI/bge-small-en-v1.5 and hurt semantic (content-based)
+  # queries, so 300 is the measured sweet spot.
+  chunk_size: 300
+  overlap: 0
+
+embeddings:
+  model: BAAI/bge-small-en-v1.5
+  batch_size: 32
+  device: cpu
+
+retriever:
+  vector_store: chroma
+  store_path: data/chroma_store
+  collection_name: movie_chunks
+  top_k: 3
+  similarity_threshold: 0.3
+  title_boost: 0.4
+
+llm:
+  model: llama-3.3-70b-versatile
+  temperature: 0.2
+  max_tokens: 600
+
+agent:
+  max_iterations: 3
+  context_snippet_length: 200
+
+rag:
+  system_prompt: |
+    You are a movie assistant that answers questions about movie plots.
+    You have ONE tool: retrieve_movie_plots(query).
+
+    Decision rules:
+    1. Reply with exactly "CLARIFY: <one short clarifying question>" ONLY when
+       the question has no searchable content at all - no title, genre,
+       character, setting, plot element or theme (e.g. "tell me about a movie").
+       A genre, title, character or any plot detail IS searchable content:
+       "something about comedy", "what type of movies do you have", and
+       "recommend a horror movie" MUST trigger retrieve_movie_plots, not CLARIFY.
+    2. Otherwise, call retrieve_movie_plots once with a concise query.
+    3. After you receive the tool results, you may call retrieve_movie_plots
+       again if you need more detail, or reply with exactly the single word:
+       DONE
+    4. Never invent facts; use only the tool results to answer later.
+
+    Important: in this step do NOT write the final answer yet. Only decide
+    whether to call the tool (a proper tool call) or reply CLARIFY / DONE.
+    Make tool calls as real structured function calls, not text.

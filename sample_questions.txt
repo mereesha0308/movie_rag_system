@@ -1,0 +1,26 @@
+Sample questions for the Mini Movie RAG system
+(verified against the fixed 500-movie subset)
+
+Fact extraction (title given):
+1. What is the plot of 4D Man?
+2. In Poltergeist II: The Other Side, who is the main villain?
+3. What is the Bengal tiger in Life of Pi called?
+4. In Billy Elliot, what sport does his father want him to learn?
+5. What kind of dinosaur is Patchi in Walking with Dinosaurs?
+6. Who is the imprisoned author in Quills?
+7. How does Count Dracula get revived in Dracula Has Risen from the Grave?
+8. Where does Robert McCall work in The Equalizer?
+9. What do the Boxtrolls wear?
+10. What does young David see land in the sandpit in Invaders from Mars?
+11. What element do the stranded aliens need in The Lost Skeleton of Cadavra?
+12. Who is the second son of Henry Frankenstein in The Ghost of Frankenstein?
+13. What begins to haunt Dr. Peter Proud in The Reincarnation of Peter Proud?
+14. What is the album the band promotes in This Is Spinal Tap?
+15. What is the name of the abused dog in Shiloh?
+
+Content-based (no title mentioned):
+16. Which movie features a Bengal tiger named Richard Parker?
+17. A boy named Eggs is raised by underground trolls who wear cardboard boxes - which movie is this?
+18. Which film tells the story of an 11-year-old boy who secretly takes ballet lessons?
+19. Which movie is about a retired CIA operative who works in a hardware store?
+20. Which movie follows a family haunted by an evil spirit in Cuesta Verde?
