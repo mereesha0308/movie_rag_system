@@ -5,6 +5,13 @@ about movie plots from a subset of the
 [Wikipedia Movie Plots](https://www.kaggle.com/datasets/jrobischon/wikipedia-movie-plots)
 dataset.
 
+## Live demo
+
+Try the deployed app: **https://movierag.streamlit.app/**
+
+The system works entirely from the command line, but a Streamlit web UI is
+included purely for user ease — anyone can ask questions about movie plots
+directly in the browser without touching any code.
 
 1. Loads the dataset and samples a **subset (500 movies)**.
 2. Preprocesses it (drop duplicates, missing values, `Unknown`/`unknown` records).
@@ -114,6 +121,9 @@ streamlit run app.py
 
 A simple web UI with a question box, `top-k` slider, and an optional
 retrieval-only mode. Open the URL Streamlit prints (default `http://localhost:8501`).
+
+> **Already deployed** — use the live version at
+> **https://movierag.streamlit.app/** (hosted on Streamlit Community Cloud).
 
 ### Sample questions
 
