@@ -22,6 +22,10 @@ data/wiki_movie_plots_clean.csv
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
+# Office temp/backup files
+~$*
+*.bak
+
 # Tooling
 .vscode/
 .idea/
