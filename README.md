@@ -224,5 +224,7 @@ To resolve this, the system implements a dense-sparse hybrid retrieval strategy.
    - If no retrieved chunk is relevant, it says
      *"I do not have that information in my sources."*
    - Otherwise it emits a JSON `{answer, reasoning}` grounded only on the context.
-6. **Output** — `main.py` prints the structured JSON; `contexts` is always built
-   from the *actual* retrieved chunks (never hallucinated by the model).
+### 6. Output
+
+`main.py` prints the structured JSON; `contexts` is always built from the
+*actual* retrieved chunks (never hallucinated by the model).
