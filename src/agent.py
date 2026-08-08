@@ -30,7 +30,7 @@ from src.retriever import Retriever, _content_tokens
 ANSWER_SYSTEM_PROMPT = """You are a movie plot assistant. Answer the user's question \
 using ONLY the retrieved movie plot chunks.
 
-- "answer": 1-2 concise, natural sentences. Always give the complete answer - never \
+- "answer": 1-3 concise, natural sentences. Always give the complete answer - never \
 truncate or cut it off mid-sentence.
 - "reasoning": A cohesive, natural paragraph explaining the logical steps taken to form the answer. \
 Describe the connection between the user's query and the specific plot points retrieved, explaining \
